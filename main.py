@@ -28,7 +28,7 @@ class Button():
     def __init__(self, x, y, image, scale):
         width = image.get_width()
         height = image.get_height()
-        self.image = pygame.transform.scale(image, (int(width * 0.2), int(height*0.2)))
+        self.image = pygame.transform.scale(image, (int(width * 0.15), int(height*0.15)))
         self.scale = scale
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
@@ -55,14 +55,14 @@ class Forest_game:
     def text():
         font1 = pygame.font.SysFont('comicsansms', 30)
         font2 = pygame.font.SysFont('comicsansms', 20)
-        font3 = pygame.font.SysFont('comicsansms', 20)
+        # font3 = pygame.font.SysFont('comicsansms', 20)
         text1 = font1.render('Esi sveicināts lielajā meža spēlē!', False, white) # text, antialiasing, color
         text2 = font2.render('Spied z, v, t vai g, lai mainītu spēles fonu!', False, white)
-        text3 = font3.render('Spied d, lai iepazītu citus meža dzīvniekus!', False, white) # text, antialiasing, color
+        # text3 = font3.render('Spied d, lai iepazītu citus meža dzīvniekus!', False, white) # text, antialiasing, color
         text1 = screen.blit(text1, (10, 10))
         text2 = screen.blit(text2, (10, 50))
-        text3 = screen.blit(text3, (10, 80))
-        return text1, text2, text3
+        # text3 = screen.blit(text3, (10, 80))
+        return text1, text2 #, text3
         
     def forest_animal_image():
         animal = random.choice(os.listdir('meza_dzivnieki')) # choose random image from folder
@@ -91,10 +91,10 @@ class Forest_game:
     def run(self):   
         while self.running:
             self.intro = Forest_game.text()
-            memory_game_image = pygame.image.load("meza_dzivnieki/vilks.png").convert_alpha()
-            learn_forest_image = pygame.image.load("meza_dzivnieki/lapsa.png").convert_alpha()
-            self.memory_game_button = Button(300, 300, memory_game_image, 1).draw()
-            self.learn_forest_button = Button(600, 300, learn_forest_image, 1).draw()
+            memory_game_image = pygame.image.load("forest_buttons/memory_eng.png").convert_alpha()
+            learn_forest_image = pygame.image.load("forest_buttons/learnforest_eng.png").convert_alpha()
+            self.memory_game_button = Button(10, 100, memory_game_image, 1).draw()
+            self.learn_forest_button = Button(10, 200, learn_forest_image, 1).draw()
             for event in pygame.event.get():
                 if event.type == QUIT:
                     self.running = False

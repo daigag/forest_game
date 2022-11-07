@@ -28,10 +28,9 @@ hidden_pictures = []
 
 def make_background():
     pygame.display.set_caption("Memory game - forest and animals")
-    game_icon = pygame.image.load(
-        'memory_game/output-onlinepngtools (1).png')
+    game_icon = pygame.image.load('memory_game/output-onlinepngtools (1).png')
     pygame.display.set_icon(game_icon)
-    background_image = pygame.image.load('background.png')
+    background_image = pygame.image.load('ziemas_bg.jpg')
     background_image = pygame.transform.scale(
         background_image, (screen_width, screen_height))
     background_image_rectangle = background_image.get_rect()

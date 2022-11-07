@@ -9,13 +9,15 @@ black = (0, 0, 0)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("She goes Tech project by Daiga and Zane :)")
 
-memory_game_image = pygame.image.load('button1.png').convert_alpha()
-learn_forest_image = pygame.image.load('button2.png').convert_alpha()
+memory_game_image = pygame.image.load(
+    'forest_buttons/learnforest_eng.png').convert_alpha()
+learn_forest_image = pygame.image.load(
+    'forest_buttons/memory_eng.png').convert_alpha()
 
 
 # button instances (how far in, how low, ..., size)
-memory_game_button = button.Button(300, 200, memory_game_image, 0.8)
-learn_forest_button = button.Button(600, 200, learn_forest_image, 0.8)
+memory_game_button = button.Button(200, 200, memory_game_image, 0.15)
+learn_forest_button = button.Button(500, 200, learn_forest_image, 0.15)
 
 
 running = True

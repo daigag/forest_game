@@ -24,15 +24,6 @@ game_icon = pygame.display.set_icon(game_icon)
 width = screen.get_width()
 height = screen.get_height()
 
-class Text():
-    def __init__(self, text, x, y, size, color, font):
-        self.text = text
-        self.x = x
-        self.y = y
-        self.size = size
-        self.color = color
-        self.font = font
-
 class Button():
     def __init__(self, x, y, image, scale):
         width = image.get_width()
@@ -55,17 +46,24 @@ class Button():
             self.clicked = False
         screen.blit(self.image, (self.rect.x, self.rect.y))
         return action
-
-class Player():
-    pass
-
-class Memory_game():
-    pass
-
-class Learn_forest():
+    
+class Forest_game:
     def __init__(self):
-        self.run = True
+        pygame.init()
+        self.running = True
 
+    def text():
+        font1 = pygame.font.SysFont('comicsansms', 30)
+        font2 = pygame.font.SysFont('comicsansms', 20)
+        # font3 = pygame.font.SysFont('comicsansms', 20)
+        text1 = font1.render('Esi sveicināts lielajā meža spēlē!', False, white) # text, antialiasing, color
+        text2 = font2.render('Spied z, v, t vai g, lai mainītu spēles fonu!', False, white)
+        # text3 = font3.render('Spied d, lai iepazītu citus meža dzīvniekus!', False, white) # text, antialiasing, color
+        text1 = screen.blit(text1, (10, 10))
+        text2 = screen.blit(text2, (10, 50))
+        # text3 = screen.blit(text3, (10, 80))
+        return text1, text2 #, text3
+        
     def forest_animal_image():
         animal = random.choice(os.listdir('meza_dzivnieki')) # choose random image from folder
         animal_image = pygame.image.load(os.path.join('meza_dzivnieki', animal)).convert() # if convert - with white background, if without - without background
@@ -86,25 +84,17 @@ class Learn_forest():
     
     def image_file_name():
         image_file_name.font = pygame.font.SysFont('comicsansms', 20)
-        image_file_name = image_file_name.font.render(os.path.splitext(str(Main().other_forest_things()))[0], True, black) # text, antialiasing, color
+        image_file_name = image_file_name.font.render(os.path.splitext(str(Forest_game.other_forest_things()))[0], True, black) # text, antialiasing, color
         image_file_name = screen.blit(image_file_name, (350, 200))
         return image_file_name
-    pass
-    
-class Main():
-    def __init__(self):
-        pygame.init()
-        self.running = True
-                
+            
     def run(self):   
-       
         while self.running:
-            self.intro = Text('Esi sveicināts lielajā meža spēlē!', 10, 10, 30, white, pygame.font.SysFont('freesansbold.ttf', 30))
-            self.intro1 = Text('Spied z, v, t vai g, lai mainītu spēles fonu!', 10, 50, 20, white, Text.font)
+            self.intro = Forest_game.text()
             memory_game_image = pygame.image.load("forest_buttons/memory_eng.png").convert_alpha()
             learn_forest_image = pygame.image.load("forest_buttons/learnforest_eng.png").convert_alpha()
             self.memory_game_button = Button(10, 100, memory_game_image, 1).draw()
-            self.learn_forest_button = Button(10, 200, learn_forest_image, 1).draw()    
+            self.learn_forest_button = Button(10, 200, learn_forest_image, 1).draw()
             for event in pygame.event.get():
                 if event.type == QUIT:
                     self.running = False
@@ -122,13 +112,11 @@ class Main():
                     elif event.key == K_v:
                         self.background = screen.blit(summer_image, (0, 0)) 
                     elif event.key == K_d:
-                        self.animal = Main().forest_animal_image()
+                        self.animal = Forest_game.forest_animal_image()
                     elif event.key == K_o:
-                        self.other = Main().other_forest_things()
-            pygame.display.flip()
-            pygame.quit()
+                        self.other = Forest_game.other_forest_things()
+                pygame.display.flip()
+        pygame.quit()
     
 if __name__ == '__main__':
-    Main().run()
-    
-    
+    Forest_game().run()

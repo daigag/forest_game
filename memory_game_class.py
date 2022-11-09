@@ -47,10 +47,10 @@ class Memory_game:
         screen.blit(score_text, (800, 300))
 
     def creating_tiles():
-        for item in os.listdir('memory_game/'):
-            pictures_for_game.append(item.split('.')[0])
-        copy_of_pictures_for_game = pictures_for_game.copy()
-        pictures_for_game.extend(copy_of_pictures_for_game)
+        for item in os.listdir('memory_game/'): # creating list of pictures
+            pictures_for_game.append(item.split('.')[0]) # adding pictures to list
+        copy_of_pictures_for_game = pictures_for_game.copy() # creating copy of list
+        pictures_for_game.extend(copy_of_pictures_for_game) # adding copy of list to list
         copy_of_pictures_for_game.clear()
         random.shuffle(pictures_for_game)
 

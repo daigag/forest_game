@@ -3,7 +3,7 @@ from pygame.locals import *
 import random
 import os
 
-green = (20, 90, 15)
+green = (1, 68, 33)
 black = (0, 0, 0)
 teal = (0, 128, 128)
 white = (255, 255, 255)

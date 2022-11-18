@@ -544,12 +544,12 @@ class Main:
     def main_background(self):
         self.intro = Text('Welcome to the Forest Game!', (150, 50)).draw()
 
-        memory_game_image = pygame.image.load("forest_buttons/memory_eng.png").convert_alpha()
-        learn_forest_image = pygame.image.load("forest_buttons/learnforest_eng.png").convert_alpha()
-        learn_forest_image1 = pygame.image.load("forest_buttons/learnforest_eng.png").convert_alpha()
-        self.memory_game_button = Button(300, 150, memory_game_image, 1).draw()
-        self.learn_forest_button = Button(300, 250, learn_forest_image, 1).draw()
-        self.learn_forest1_button = Button(300, 350, learn_forest_image1, 1).draw()
+        memory_game_image = pygame.image.load("meza_dzivnieki/vilks.png").convert_alpha()
+        learn_forest_image = pygame.image.load("meza_dzivnieki/lapsa.png").convert_alpha()
+        learn_forest_image1 = pygame.image.load("meza_dzivnieki/lācis.png").convert_alpha()
+        self.memory_game_button = Button(200, 250, memory_game_image, 1).draw()
+        self.learn_forest_button = Button(500, 250, learn_forest_image, 1).draw()
+        self.learn_forest1_button = Button(800, 250, learn_forest_image1, 1).draw()
         
            
     def run(self):   

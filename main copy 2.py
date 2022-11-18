@@ -6,9 +6,6 @@ from gtts import gTTS
 pygame.init()
 mixer.init()
 
-# Create TextInput-object
-textinput = pygame_textinput.TextInputVisualizer()
-
 #color variables
 green = (1, 68, 33)
 black = (0, 0, 0)
@@ -443,12 +440,8 @@ class Learn_forest:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.quit()
-                    
-                elif event.type == KEYDOWN:
-                    if event.key == K_1:
-                        Learn_forest.forest_animal_image()
 
-                elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     
                     for item in Learn_forest.forest_animal_image():
                         if item.collidepoint(event.pos):

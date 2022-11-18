@@ -4,8 +4,8 @@ import random
 
 pygame.init()
 
-timer = pygame.time.Clock()
-fps = 60
+# timer = pygame.time.Clock()
+# fps = 60
 screen_width = 1000
 screen_height = 600
 picture_size = 90
@@ -20,11 +20,13 @@ black = (0, 0, 0)
 first_guess = None
 second_guess = None
 font = pygame.font.Font('freesansbold.ttf', 22)
+smaller_font = pygame.font.Font('freesansbold.ttf', 14)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pictures_for_game = []
 pictures_in_memory = []
 pictures_in_memory_rectangle = []
 hidden_pictures = []
+score = 0
 
 
 class Memory_game:
@@ -49,6 +51,9 @@ class Memory_game:
             self.background_image, (screen_width, screen_height))
         background_image_rectangle = background_image.get_rect()
         screen.blit(background_image, background_image_rectangle)
+        background_change_text = smaller_font.render(
+            f'Black background - Press "a"', True, white)
+        screen.blit(background_change_text, (790, 500))
 
     def update_score(self):
         score_text = font.render(
@@ -86,12 +91,15 @@ class Memory_game:
         Memory_game.initial_background_setup(self)
 
         while self.run:
-            timer.tick(fps)
             Memory_game.update_score(self)
+            pygame.display.update()
+
+            # timer.tick(fps)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.quit()
+                    # Main().run() # I will make that pressing x will lead to main screen instead of quitiing
 
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     for item in pictures_in_memory_rectangle:
@@ -109,6 +117,18 @@ class Memory_game:
                                     hidden_pictures[self.first_guess] = True
                                     self.score += 1
 
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.run = False
+                        Memory_game().run()     # why is it not restarting, but just adding ?????
+                    if event.key == pygame.K_a:
+                        self.background = screen.fill(black)
+                        background_change_text = smaller_font.render(
+                            f'Forest background - Press "s"', True, white)
+                        screen.blit(background_change_text, (790, 500))
+                    if event.key == pygame.K_s:
+                        self.initial_background_setup()
+
             for i in range(len(pictures_for_game)):
                 if hidden_pictures[i] == True:
                     screen.blit(
@@ -121,20 +141,20 @@ class Memory_game:
             if self.first_guess != None and self.second_guess != None:
                 if pictures_for_game[self.first_guess] == pictures_for_game[self.second_guess]:
                     self.first_guess, self.second_guess = None, None
+
                 else:
                     pygame.time.wait(1000)
                     hidden_pictures[self.first_guess] = False
                     hidden_pictures[self.second_guess] = False
                     self.first_guess, self.second_guess = None, None
 
-            win = 1
-            for number in range(len(hidden_pictures)):
-                win *= hidden_pictures[number]
+            # win = 1
+            # for number in range(len(hidden_pictures)):
+            #     win *= hidden_pictures[number]
 
-            if win == 1:
-                self.running = False
+            # if win == 1:
+            #     self.run = False
 
-        Memory_game.update_score(self)
         pygame.display.update()
         pygame.display.flip()
 

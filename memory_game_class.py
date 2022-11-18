@@ -43,8 +43,8 @@ class Memory_game:
             background_image, (screen_width, screen_height))
         background_image_rectangle = background_image.get_rect()
         screen.blit(background_image, background_image_rectangle)
-        score_text = font.render(f'Current turns: {score //2 }', True, white)
-        screen.blit(score_text, (800, 300))
+        Memory_game.score_text = font.render(f'Current turns: {score //2 }', True, white)
+        screen.blit(Memory_game.score_text, (800, 300))
 
     def creating_tiles():
         for item in os.listdir('memory_game/'): # creating list of pictures

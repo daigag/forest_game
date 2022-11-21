@@ -17,8 +17,6 @@ top_margin = (screen_height - ((picture_size + 8) * rows)) // 2
 bottom_margin = top_margin
 white = (255, 255, 255)
 black = (0, 0, 0)
-first_guess = None
-second_guess = None
 font = pygame.font.Font('freesansbold.ttf', 22)
 smaller_font = pygame.font.Font('freesansbold.ttf', 14)
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -51,9 +49,6 @@ class Memory_game:
             self.background_image, (screen_width, screen_height))
         background_image_rectangle = background_image.get_rect()
         screen.blit(background_image, background_image_rectangle)
-        # background_change_text = smaller_font.render(
-        #     f'Black background - Press "a"', True, white)
-        # screen.blit(background_change_text, (790, 500))
 
     def update_score(self):
         score_text = font.render(
@@ -121,15 +116,19 @@ class Memory_game:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.run = False
-                        screen.fill(white)
-                        self.run()    # why is it not restarting, but just adding ?????
-                    # if event.key == pygame.K_a:
-                    #     self.background = screen.fill(black)
-                    #     background_change_text = smaller_font.render(
-                    #         f'Forest background - Press "s"', True, white)
-                    #     screen.blit(background_change_text, (790, 500))
-                    # if event.key == pygame.K_s:
-                    #     self.initial_background_setup()
+                        self.pictures_for_game = []
+                        self.pictures_in_memory = []
+                        self.pictures_in_memory_rectangle = []
+                        self.hidden_pictures = []
+                        self.score = 0
+                        self.first_guess = False
+                        self.second_guess = False
+                        self.run = True
+                        screen.blit(self.background_image, (0, 0))
+
+                        # Memory_game().run()
+
+                        # self.run()    # why is it not restarting, but just adding ?????
 
             for i in range(len(pictures_for_game)):
                 if hidden_pictures[i] == True:
@@ -150,16 +149,20 @@ class Memory_game:
                     hidden_pictures[self.second_guess] = False
                     self.first_guess, self.second_guess = None, None
 
-            # win = 1
-            # for number in range(len(hidden_pictures)):
-            #     win *= hidden_pictures[number]
-
-            # if win == 1:
-            #     self.run = False
                 screen.fill(white)
                 Memory_game.initial_background_setup(self)
                 Memory_game.update_score(self)
                 pygame.display.update()
+
+            win = 1
+            for number in range(len(hidden_pictures)):
+                win *= hidden_pictures[number]
+
+            if win == 1:
+                winner = pygame.draw.rect(screen, white, (300, 900, 0, 5))
+                winner_text = font.render(
+                    f'You won in {self.score} turns!', True, black)
+                screen.blit(winner_text, winner)
 
         pygame.display.flip()
 

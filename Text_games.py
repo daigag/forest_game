@@ -9,7 +9,7 @@ class Text:
         self.pos = pos
         self.fontname = None
         self.fontsize = 60
-        self.fontcolor = Color('white')
+        self.fontcolor = (255, 255, 255)
         self.set_font()
         self.render()
 

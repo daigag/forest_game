@@ -11,6 +11,16 @@ import pygame
 pygame.init()
 mixer.init()
 
+# main screen
+screen = pygame.display.set_mode((1000, 600))
+background = screen.fill(green)
+title = pygame.display.set_caption('Forest Game by Zane and Daiga')
+icon = pygame.image.load('citi_atteli/skuja.png')
+icon = pygame.display.set_icon(icon)
+
+screen_width = screen.get_width()
+screen_height = screen.get_height()
+
 
 class Main():
 

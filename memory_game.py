@@ -87,7 +87,7 @@ class Memory_game:
         Memory_game.creating_tiles()
         Memory_game.initial_background_setup(self)
 
-        while self.run:
+        while self.running:
             Memory_game.update_score(self)
             pygame.display.update()
 
@@ -116,7 +116,7 @@ class Memory_game:
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        self.run = False
+                        self.running = False
                         screen.fill(white)
                         self.run()    # why is it not restarting, but just adding ?????
 

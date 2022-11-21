@@ -1,18 +1,11 @@
 
-import pygame
-import random
 import os
-import sys
-import csv
-import time
-from pygame.locals import *
-from deep_translator import GoogleTranslator
-import pygame_textinput
-import Open_csv
-from main import Read_loud
+import pygame
 from pygame import mixer
+from Read_loud import *
+import random
 
-mixer.init()
+
 # color variables
 green = (1, 68, 33)
 black = (0, 0, 0)
@@ -42,6 +35,8 @@ pygame.font.get_fonts()
 
 screen_width = screen.get_width()
 screen_height = screen.get_height()
+
+mixer.init()
 
 
 class Pointer(pygame.sprite.Sprite):
@@ -90,29 +85,12 @@ class Hide_and_seek:
                             random.randrange(0, screen_height))
         object_group.add(new_target)
 
-    def backround_Hide_and_seek():
-        pygame.display.set_caption("Memory game - forest and animals")
-        game_icon = pygame.image.load(
-            'memory_game/output-onlinepngtools (1).png')
-        pygame.display.set_icon(game_icon)
-        background_image = pygame.image.load('ziemas_bg.jpg')
-        background_image = pygame.transform.scale(
-            background_image, (screen_width, screen_height))
-        background_image_rectangle = background_image.get_rect()
-        screen.blit(background_image, background_image_rectangle)
-        score_text = Memory_game.font.render(
-            f'Current turns: {Memory_game.score //2 }', True, white)
-        screen.blit(score_text, (800, 300))
-        pygame.mouse.set_visible(False)
-
     def __init__(self):
         pygame.init()
         self.running = True
 
         screen.blit(summer_img, (0, 0))
         pygame.display.update()
-
-        self.pointer = Pointer()
 
         Hide_and_seek.pointer_group.draw(screen)
         Hide_and_seek.pointer_group.update()
@@ -127,32 +105,27 @@ class Hide_and_seek:
                 0, screen_width), random.randrange(0, screen_height))
             Hide_and_seek.object_group.add(new_target)
 
-        pygame.mouse.set_visible(False)
-
     def run(self):
 
         while True:
             pygame.display.update()
+            pygame.mouse.set_visible(False)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     screen.fill(green)
+                    pygame.mouse.set_visible(True)
                     Main().run()
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    Hide_and_seek.pointer.klick()
-
-                # if event.type == pygame.KEYDOWN:
-                #     button_press_time = pygame.time.get_ticks()
-                #     screen.fill((255,255,255))
-
-            # current_time = pygame.time.get_ticks()
-            # if current_time - button_press_time > 2000:
-            #     screen.fill((0,0,0))
-            # print(f"current_time {current_time} button_press time: {button_press_time}")
+                    Pointer().klick()
 
             screen.blit(summer_img, (0, 0))
             Hide_and_seek.object_group.draw(screen)
             Hide_and_seek.pointer_group.draw(screen)
             Hide_and_seek.pointer_group.update()
             pygame.display.flip()
+
+
+if __name__ == '__main__':
+    Hide_and_seek().run()

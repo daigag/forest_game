@@ -1,7 +1,7 @@
 
-from Text_games import *
-from Learn_forest import *
-from Hide_and_seek import *
+from text import *
+from learn_forest import *
+from hide_and_seek import *
 from memory_game import *
 from button import *
 from pygame import mixer

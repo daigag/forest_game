@@ -1,6 +1,7 @@
 import pygame
 import os
 import random
+from main import *
 
 pygame.init()
 
@@ -96,7 +97,8 @@ class Memory_game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.quit()
-                    Main().run()  # I will make that pressing x will lead to main screen instead of quitiing
+
+                    # Main().run()  # I will make that pressing x will lead to main screen instead of quitiing
 
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     for item in pictures_in_memory_rectangle:
@@ -116,9 +118,9 @@ class Memory_game:
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        self.running = False
-                        screen.fill(white)
-                        self.run()    # why is it not restarting, but just adding ?????
+
+                        screen.blit(self.background_image, (0, 0))
+                        Main().run()
 
             for i in range(len(pictures_for_game)):
                 if hidden_pictures[i] == True:

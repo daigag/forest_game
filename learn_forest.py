@@ -2,7 +2,7 @@
 import pygame
 import random
 import os
-import sys
+
 import csv
 import time
 from pygame.locals import *
@@ -16,6 +16,7 @@ screen = pygame.display.set_mode((1000, 600))
 summer_img = pygame.image.load("vasaras_bg.jpg")
 summer_img = pygame.transform.scale(summer_img, (1000, 600))
 white = (255, 255, 255)
+green = (1, 68, 33)
 
 
 class Learn_forest:

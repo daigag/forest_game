@@ -1,15 +1,14 @@
 import pygame
 import os
 import random
-from main import *
+
 
 pygame.init()
 white = (255, 255, 255)
 black = (0, 0, 0)
 screen_width = 1000
 screen_height = 600
-screen_width = screen.get_width()
-screen_height = screen.get_height()
+
 picture_size = 90
 columns = 6
 rows = 6
@@ -115,9 +114,6 @@ class Memory_game:
                     if event.key == pygame.K_SPACE:
                         screen.blit(self.background_image, (0, 0))
                         Main().run()
-                    if event.key == pygame.K_s:
-                        screen.blit(self.background_image, (0, 0))
-                        Memory_game().run()
 
             for i in range(len(pictures_for_game)):
                 if hidden_pictures[i] == True:

@@ -4,32 +4,19 @@ import pygame
 from pygame import mixer
 from sound import *
 import random
+from main import *
 
-# color variables
-green = (1, 68, 33)
-black = (0, 0, 0)
-teal = (0, 128, 128)
-white = (255, 255, 255)
-red = (255, 0, 0)
-gray = (128, 128, 128)
+mixer.init()
 
-# clock
-timer = pygame.time.Clock()
-fps = 60
-
+screen_width = 1000
+screen_height = 600
 # background images
 winter_img = pygame.image.load("ziemas_bg.jpg")
 winter_img = pygame.transform.scale(winter_img, (1000, 600))
 summer_img = pygame.image.load("vasaras_bg.jpg")
 summer_img = pygame.transform.scale(summer_img, (1000, 600))
-
-
-pygame.font.get_fonts()
 screen = pygame.display.set_mode((1000, 600))
-screen_width = screen.get_width()
-screen_height = screen.get_height()
-
-mixer.init()
+pygame.font.get_fonts()
 
 
 class Pointer(pygame.sprite.Sprite):

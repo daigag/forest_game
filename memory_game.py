@@ -4,11 +4,12 @@ import random
 from main import *
 
 pygame.init()
-
-# timer = pygame.time.Clock()
-# fps = 60
+white = (255, 255, 255)
+black = (0, 0, 0)
 screen_width = 1000
 screen_height = 600
+screen_width = screen.get_width()
+screen_height = screen.get_height()
 picture_size = 90
 columns = 6
 rows = 6
@@ -16,10 +17,6 @@ left_margin = (screen_width - ((picture_size + 8) * columns)) // 2
 right_margin = left_margin
 top_margin = (screen_height - ((picture_size + 8) * rows)) // 2
 bottom_margin = top_margin
-white = (255, 255, 255)
-black = (0, 0, 0)
-first_guess = None
-second_guess = None
 font = pygame.font.Font('freesansbold.ttf', 22)
 smaller_font = pygame.font.Font('freesansbold.ttf', 14)
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -96,9 +93,8 @@ class Memory_game:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    self.running = False
                     pygame.display.quit()
-
-                    # Main().run()  # I will make that pressing x will lead to main screen instead of quitiing
 
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     for item in pictures_in_memory_rectangle:
@@ -109,7 +105,6 @@ class Memory_game:
                                         item)
                                     hidden_pictures[self.second_guess] = True
                                     self.score += 1
-
                                 else:
                                     self.first_guess = pictures_in_memory_rectangle.index(
                                         item)
@@ -118,9 +113,11 @@ class Memory_game:
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-
                         screen.blit(self.background_image, (0, 0))
                         Main().run()
+                    if event.key == pygame.K_s:
+                        screen.blit(self.background_image, (0, 0))
+                        Memory_game().run()
 
             for i in range(len(pictures_for_game)):
                 if hidden_pictures[i] == True:
@@ -141,20 +138,12 @@ class Memory_game:
                     hidden_pictures[self.second_guess] = False
                     self.first_guess, self.second_guess = None, None
 
-            # win = 1
-            # for number in range(len(hidden_pictures)):
-            #     win *= hidden_pictures[number]
-
-            # if win == 1:
-            #     self.run = False
                 screen.fill(white)
                 Memory_game.initial_background_setup(self)
                 Memory_game.update_score(self)
                 pygame.display.update()
 
         pygame.display.flip()
-
-    # pygame.quit()
 
 
 if __name__ == '__main__':

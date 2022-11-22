@@ -1,12 +1,13 @@
 
-from text import *
-from learn_forest import *
-from hide_and_seek import *
+from text import Text
+from learn_forest import Learn_forest
+from hide_and_seek import Hide_and_seek
 from memory_game import Memory_game
-from button import *
+from button import Button
 from pygame import mixer
 from pygame.locals import *
 import pygame
+from sound import Read_loud
 
 pygame.init()
 mixer.init()

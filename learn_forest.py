@@ -20,7 +20,7 @@ class Learn_forest:
     def __init__(self):
         pygame.init()
         self.running = True
-        self.background = background
+        self.background = screen.blit(summer_img, (0, 0))
         pygame.display.update()
  
     def forest_animal_image(path):

@@ -81,7 +81,6 @@ class Learn_forest:
         while True:
             for event in pygame.event.get():
                 if event.type == QUIT:
-                    screen.fill(background)
                     pygame.quit()                                     
                 elif event.type == KEYDOWN:
                     if event.key == K_1:

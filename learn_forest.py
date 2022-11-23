@@ -3,41 +3,43 @@ from pygame.locals import *
 from sound import *
 from deep_translator import GoogleTranslator
 
-white = (255, 255, 255)
-red = (255, 0, 0)
-green = (1, 68, 33)
-
-summer_img = pygame.image.load("vasaras_bg.jpg")
-summer_img = pygame.transform.scale(summer_img, (1000, 600))
-
 screen = pygame.display.set_mode((1000, 600))
-background = screen.blit(summer_img, (0, 0))
-title = pygame.display.set_caption('Learn Forest - learn animals and other forest things')
-icon = pygame.image.load('citi_atteli/an acorn.png')
-icon = pygame.display.set_icon(icon)
 
 class Learn_forest:
+    white = (255, 255, 255)
+    red = (255, 0, 0)
+    green = (1, 68, 33)
+    
+    
     def __init__(self):
         pygame.init()
         self.running = True
-        self.background = screen.blit(summer_img, (0, 0))
+        Learn_forest.background()
         pygame.display.update()
+        
+    def background():
+        pygame.display.set_caption('Learn Forest - learn animals and other forest things')
+        icon = pygame.image.load('citi_atteli/an acorn.png')
+        icon = pygame.display.set_icon(icon)
+        summer_img = pygame.image.load("vasaras_bg.jpg")
+        summer_img = pygame.transform.scale(summer_img, (1000, 600))
+        screen.blit(summer_img, (0, 0))
  
     def forest_animal_image(path):
         animal = random.choice(os.listdir(path)) # choose random image from folder
         animal_img = pygame.image.load(os.path.join(path, animal)).convert() # if convert - with white background
         animal_img = pygame.transform.scale(animal_img, (300, 300)) # resize image
-        animal_img = screen.blit(animal_img, (350,100)) # draw image on screen
+        animal_img = screen.blit(animal_img, (350,100)) # draw image on Learn_forest.
         animal_name = os.path.splitext(str(animal))[0] # get name of image without extension
         font = pygame.font.SysFont('comicsansms', 30) # set font
-        text = font.render(f'In English: {animal_name}', True, white)
+        text = font.render(f'In English: {animal_name}', True, Learn_forest.white)
         text = screen.blit(text, (350, 400)) 
         latvian = GoogleTranslator(source='auto', target='lv').translate(animal_name)
         lithuanian = GoogleTranslator(source='auto', target='lt').translate(animal_name)
         latvian = str(latvian)
         lithuanian = str(lithuanian)
-        latvian_animal = font.render(f'Latviski: {latvian}', True, white)
-        lithuanian_animal = font.render(f'Lietuvių: {lithuanian}', True, white)
+        latvian_animal = font.render(f'Latviski: {latvian}', True, Learn_forest.white)
+        lithuanian_animal = font.render(f'Lietuvių: {lithuanian}', True, Learn_forest.white)
         latvian_animal = screen.blit(latvian_animal, (350, 450))
         lithuanian_animal = screen.blit(lithuanian_animal, (350, 500))
         read_english = Read_loud.say(f'This is {animal_name}.')
@@ -48,15 +50,15 @@ class Learn_forest:
         path = os.listdir('meza_dzivnieki')
         guess = random.choice(path)
         guess = os.path.splitext(str(guess))[0]
-        text = font.render(f'Is it {guess}?', True, red)
+        text = font.render(f'Is it {guess}?', True, Learn_forest.red)
         text = screen.blit(text, (350, 50))
         read_english = Read_loud.say(f'Is it {guess}?')
-        text2 = font.render(f'Your answer (y/n):', True, red)
+        text2 = font.render(f'Your answer (y/n):', True, Learn_forest.red)
         text2 = screen.blit(text2, (100, 450))
         animal = random.choice(os.listdir('meza_dzivnieki')) # choose random image from folder
         animal_img = pygame.image.load(os.path.join('meza_dzivnieki', animal)).convert() # if convert - with white background, if without - without background
         animal_img = pygame.transform.scale(animal_img, (300, 300)) # resize image
-        animal_img = screen.blit(animal_img, (350,150)) # draw image on screen
+        animal_img = screen.blit(animal_img, (350,150)) # draw image on Learn_forest.
         animal_name = os.path.splitext(str(animal))[0]
         animal_name = print(animal_name)
         str(guess) == str(animal_name) # compare guess with animal name
@@ -68,34 +70,38 @@ class Learn_forest:
         mixer.music.load('sounds/forest_summer.wav')
         mixer.music.play()   
         font = pygame.font.SysFont('arial bold', 40)
-        ex = font.render('Press "1" to learn animals, press "2" to learn other forest things!', True, white)
+        ex = font.render('Press "1" to learn animals, press "2" to learn other forest things!', True, Learn_forest.white)
         ex = screen.blit(ex, (70, 70))
-        ex2 = font.render('Press "3", if you already know animals and forest things!', True, white)
+        ex2 = font.render('Press "3", if you already know animals and forest things!', True, Learn_forest.white)
         ex2 = screen.blit(ex2, (70, 140)) 
         
         base_font = pygame.font.Font(None, 72)
         user_text = ''
         input_rect = pygame.Rect(600, 460, 0, 0)
-        color = green
+        color = Learn_forest.green
       
         while True:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()                                     
                 elif event.type == KEYDOWN:
-                    if event.key == K_1:
+                    if event.key == K_ESCAPE:
+                        self.running = False
+                        screen.fill((1, 68, 33))
+                        return
+                    elif event.key == K_1:
                         pygame.key.set_repeat() 
-                        screen.blit(summer_img, (0, 0))
+                        Learn_forest.background()
                         pygame.display.update()
                         Learn_forest.forest_animal_image('meza_dzivnieki')
                     elif event.key == K_2:
                         pygame.key.set_repeat() 
-                        screen.blit(summer_img, (0, 0))
+                        Learn_forest.background()
                         pygame.display.update()
                         Learn_forest.forest_animal_image('citi_atteli')
                     elif event.key == K_3:
                         pygame.key.set_repeat()
-                        screen.blit(summer_img, (0, 0))
+                        Learn_forest.background()
                         pygame.display.update()
                         Learn_forest.what_is_it()
                         user_text = user_text[:-1]
@@ -105,10 +111,10 @@ class Learn_forest:
                         user_text += event.unicode
                     #if Learn_forest.what_is_it() == ('True'):                          
                         if user_text == "n":
-                            text2 = font.render('Correct! Press "3" for next!', True, white)
+                            text2 = font.render('Correct! Press "3" for next!', True, Learn_forest.white)
                             text2 = screen.blit(text2, (600, 550))
                         elif user_text == "y":
-                            text2 = font.render('Wrong! Press "3" for next!', True, red)
+                            text2 = font.render('Wrong! Press "3" for next!', True, Learn_forest.red)
                             text2 = screen.blit(text2, (600, 550))
                         else:
                             user_text = user_text[:-1]                                           

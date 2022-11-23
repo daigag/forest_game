@@ -1,22 +1,10 @@
-
 import os
 import pygame
-from pygame import mixer
-from sound import Read_loud
+from pygame.locals import *
+from sound import *
 import random
 
-mixer.init()
-
-screen_width = 1000
-screen_height = 600
-# background images
-winter_img = pygame.image.load("ziemas_bg.jpg")
-winter_img = pygame.transform.scale(winter_img, (1000, 600))
-summer_img = pygame.image.load("vasaras_bg.jpg")
-summer_img = pygame.transform.scale(summer_img, (1000, 600))
 screen = pygame.display.set_mode((1000, 600))
-pygame.font.get_fonts()
-
 
 class Pointer(pygame.sprite.Sprite):
     def __init__(self):
@@ -47,6 +35,9 @@ class Object(pygame.sprite.Sprite):
 
 
 class Hide_and_seek:
+    
+    winter_img = pygame.image.load("ziemas_bg.jpg")
+    winter_img = pygame.transform.scale(winter_img, (1000, 600))
 
     pointer = Pointer()
     pointer_group = pygame.sprite.Group()
@@ -55,15 +46,21 @@ class Hide_and_seek:
     # Object
     object_group = pygame.sprite.Group()
     for Object.target in range(20):
-        new_target = Object(random.randrange(0, screen_width),
-                            random.randrange(0, screen_height))
+        new_target = Object(random.randrange(0, 1000),
+                            random.randrange(0, 600))
         object_group.add(new_target)
 
     def __init__(self):
         pygame.init()
         self.running = True
+        
+        pygame.display.set_caption('Hide and seek')
+        icon = pygame.image.load('citi_atteli/an acorn.png')
+        icon = pygame.display.set_icon(icon)
 
-        screen.blit(summer_img, (0, 0))
+        background = screen.blit(Hide_and_seek.winter_img, (0, 0))
+        background
+
         pygame.display.update()
 
         Hide_and_seek.pointer_group.draw(screen)
@@ -76,7 +73,7 @@ class Hide_and_seek:
 
         for self.target in range(20):
             new_target = Object(random.randrange(
-                0, screen_width), random.randrange(0, screen_height))
+                0, 1000), random.randrange(0, 600))
             Hide_and_seek.object_group.add(new_target)
 
         pygame.mouse.set_visible(False)
@@ -88,22 +85,20 @@ class Hide_and_seek:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    screen.fill(green)
-                    Main().run()
+                    pygame.quit()
+                    
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == K_ESCAPE:
+                        
+                        screen.fill((1, 68, 33))
+                        return
+                    
+                    
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     Pointer().klick()
 
-                # if event.type == pygame.KEYDOWN:
-                #     button_press_time = pygame.time.get_ticks()
-                #     screen.fill((255,255,255))
-
-            # current_time = pygame.time.get_ticks()
-            # if current_time - button_press_time > 2000:
-            #     screen.fill((0,0,0))
-            # print(f"current_time {current_time} button_press time: {button_press_time}")
-
-            screen.blit(summer_img, (0, 0))
+            screen.blit(Hide_and_seek.winter_img, (0, 0))
             Hide_and_seek.object_group.draw(screen)
             Hide_and_seek.pointer_group.draw(screen)
             Hide_and_seek.pointer_group.update()

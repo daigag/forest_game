@@ -6,6 +6,7 @@ import random
 pygame.init()
 white = (255, 255, 255)
 black = (0, 0, 0)
+green = (0, 50, 0)
 screen_width = 1000
 screen_height = 600
 
@@ -123,7 +124,7 @@ class Memory_game:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.running = False
-                        screen.fill((1, 68, 33))
+                        screen.fill(green)
                         pygame.display.set_caption(
                             "Forest Game by Zane and Daiga")
                         return

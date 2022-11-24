@@ -14,21 +14,20 @@ pygame.init()
 white = (255, 255, 255)
 green = (0, 50, 0)
 
-# main screen
 screen = pygame.display.set_mode((1000, 600))
-background = screen.fill(green)
-title = pygame.display.set_caption('Forest Game by Zane and Daiga')
-icon = pygame.image.load('citi_atteli/a pine needle.png')
-icon = pygame.display.set_icon(icon)
-screen_width = screen.get_width()
-screen_height = screen.get_height()
 
-class Main():
+class Main:
 
     def __init__(self):
         pygame.init()
         self.background_image = None
         self.running = True
+        
+    def background():
+        screen.fill(green)
+        pygame.display.set_caption('Forest Game by Zane and Daiga')
+        icon = pygame.image.load('citi_atteli/a pine needle.png')
+        icon = pygame.display.set_icon(icon)
 
     def main_background(self):
 
@@ -55,6 +54,7 @@ class Main():
     def run(self):
 
         while self.running:
+            Main.background()
             Main.main_background(self)
 
             for event in pygame.event.get():

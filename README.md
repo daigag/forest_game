@@ -1,6 +1,6 @@
 # forest_game
 SheGoesTech project 
-made by Zane Hovlande and Daiga Grieze
+made by Zane Hovlanne and Daiga Grieze
 
 
 The Forest Game is a game platform that consists of three games: Memory Game, Hide and Seek and Learn Forest.

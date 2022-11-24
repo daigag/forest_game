@@ -1,24 +1,18 @@
+import pygame
+from pygame.locals import *
 
-from text import Text
 from learn_forest import Learn_forest
 from hide_and_seek import Hide_and_seek
 from memory_game import Memory_game
+
+from text import Text
 from button import Button
-from pygame import mixer
-from pygame.locals import *
-import pygame
-from sound import Read_loud
+from sound import *
 
 pygame.init()
-mixer.init()
 
-# colours
 white = (255, 255, 255)
-black = (0, 0, 0)
-green = (1, 68, 33)
-teal = (0, 128, 128)
-red = (255, 0, 0)
-gray = (128, 128, 128)
+green = (0, 50, 0)
 
 # clock
 timer = pygame.time.Clock()
@@ -28,21 +22,10 @@ fps = 60
 screen = pygame.display.set_mode((1000, 600))
 background = screen.fill(green)
 title = pygame.display.set_caption('Forest Game by Zane and Daiga')
-icon = pygame.image.load('citi_atteli/skuja.png')
+icon = pygame.image.load('citi_atteli/a pine needle.png')
 icon = pygame.display.set_icon(icon)
 screen_width = screen.get_width()
 screen_height = screen.get_height()
-screen_width = 1000
-screen_height = 600
-
-# background images
-winter_img = pygame.image.load("ziemas_bg.jpg")
-winter_img = pygame.transform.scale(winter_img, (1000, 600))
-summer_img = pygame.image.load("vasaras_bg.jpg")
-summer_img = pygame.transform.scale(summer_img, (1000, 600))
-
-pygame.font.get_fonts()
-
 
 class Main():
 
@@ -69,9 +52,9 @@ class Main():
         self.memory_game_button = Button(
             325, 100, memory_game_image, 1).draw()
         self.hide_and_seek_button = Button(
-            325, 275, hide_and_seek_image, 1).draw()
+            325, 250, hide_and_seek_image, 1).draw()
         self.learn_forest_button = Button(
-            325, 450, learn_forest_image, 1).draw()
+            325, 400, learn_forest_image, 1).draw()
 
     def run(self):
 
@@ -92,7 +75,6 @@ class Main():
                     Learn_forest().run()
             pygame.display.flip()
         pygame.quit()
-
 
 if __name__ == '__main__':
     Main().run()

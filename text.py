@@ -2,7 +2,6 @@ import pygame
 
 screen = pygame.display.set_mode((1000, 600))
 
-
 class Text:
     def __init__(self, text, pos, **options):
         self.text = text

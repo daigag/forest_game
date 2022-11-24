@@ -87,6 +87,7 @@ class Hide_and_seek:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.running = False
+                        pygame.mouse.set_visible(True)
                         screen.blit(screen, (0, 0))
                         pygame.display.update()
                         return

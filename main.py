@@ -14,10 +14,6 @@ pygame.init()
 white = (255, 255, 255)
 green = (0, 50, 0)
 
-# clock
-timer = pygame.time.Clock()
-fps = 60
-
 # main screen
 screen = pygame.display.set_mode((1000, 600))
 background = screen.fill(green)

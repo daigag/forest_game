@@ -1,10 +1,11 @@
-import pygame, os, random
+import os
+import pygame
 from pygame.locals import *
 from sound import *
+import random
 
 screen = pygame.display.set_mode((1000, 600))
 
-green = (0, 50, 0)
 
 class Pointer(pygame.sprite.Sprite):
     def __init__(self):
@@ -13,6 +14,7 @@ class Pointer(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (20, 20))
         self.rect = self.image.get_rect()
         self.catch = pygame.mixer.Sound('sounds/win.wav')
+        self.screen = screen
 
     def klick(self):
         self.catch.play()
@@ -21,6 +23,7 @@ class Pointer(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.center = pygame.mouse.get_pos()
+
 
 class Object(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
@@ -32,8 +35,9 @@ class Object(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = [pos_x, pos_y]
 
+
 class Hide_and_seek:
-    
+
     winter_img = pygame.image.load("ziemas_bg.jpg")
     winter_img = pygame.transform.scale(winter_img, (1000, 600))
 
@@ -51,26 +55,18 @@ class Hide_and_seek:
     def __init__(self):
         pygame.init()
         self.running = True
-     
-    def run(self):
 
         pygame.display.set_caption('Hide and seek')
-        icon = pygame.image.load('citi_atteli/a fly agaric.png')
+        icon = pygame.image.load('citi_atteli/an acorn.png')
         icon = pygame.display.set_icon(icon)
-
-        background = screen.blit(Hide_and_seek.winter_img, (0, 0))
-        background
+        screen.blit(Hide_and_seek.winter_img, (0, 0))
 
         pygame.display.update()
-
         Hide_and_seek.pointer_group.draw(screen)
         Hide_and_seek.pointer_group.update()
-        pygame.display.flip()
-
         Hide_and_seek.object_group.draw(screen)
         Hide_and_seek.pointer_group.draw(screen)
         Hide_and_seek.pointer_group.update()
-
         for self.target in range(20):
             new_target = Object(random.randrange(
                 0, 1000), random.randrange(0, 600))
@@ -78,6 +74,9 @@ class Hide_and_seek:
 
         pygame.mouse.set_visible(False)
 
+    def run(self):
+
+        pygame.display.flip()
 
         while True:
             pygame.display.update()
@@ -85,26 +84,21 @@ class Hide_and_seek:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    
-                elif event.type == pygame.KEYDOWN:
-                    if event.type == K_ESCAPE:
-                        pygame.display.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
                         self.running = False
-                        screen.fill(green)
-                        pygame.display.set_caption('Forest Game by Zane and Daiga')
-                        icon = pygame.image.load('citi_atteli/a pine needle.png')
-                        icon = pygame.display.set_icon(icon)
+                        screen.blit(screen, (0, 0))
+                        pygame.display.update()
                         return
-            
-                elif event.type == MOUSEBUTTONDOWN:
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
                     Pointer().klick()
 
-                screen.blit(Hide_and_seek.winter_img, (0, 0))
-                Hide_and_seek.object_group.draw(screen)
-                Hide_and_seek.pointer_group.draw(screen)
-                Hide_and_seek.pointer_group.update()
+            screen.blit(Hide_and_seek.winter_img, (0, 0))
+            Hide_and_seek.object_group.draw(screen)
+            Hide_and_seek.pointer_group.draw(screen)
+            Hide_and_seek.pointer_group.update()
             pygame.display.flip()
-            pygame.display.update()
 
 
 if __name__ == '__main__':
